@@ -1,8 +1,6 @@
 import os
-import sqlite3
 import asyncio
 import re
-from io import BytesIO
 
 from aiogram.types import FSInputFile
 
@@ -18,7 +16,7 @@ from aiogram.filters import Command, CommandStart
 # --- Telethon --- #
 api_id = 25404839
 api_hash = '63cdb13b5a70a129f301b84f1cd3b455'
-client = TelegramClient('database/27749763255.session', api_id, api_hash)
+client = TelegramClient('27749763255.session', api_id, api_hash)
 
 # --- Aiogram --- #
 bot = Bot(token="7452829269:AAFslnBL0gLKJLrFA4CqWHcViqvjQxFc_kk")
