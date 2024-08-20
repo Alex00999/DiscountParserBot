@@ -29,7 +29,7 @@ db = DataBase()
 
 # --- Settings --- #
 TARGET_CHAT_ID = 418921990
-CHANNEL_NAME = 'Записки еврея'
+CHANNEL_NAME = 'Записки Еврея'
 
 
 def keywords_in_string(keywords, string):
