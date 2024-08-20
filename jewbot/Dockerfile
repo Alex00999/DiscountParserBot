@@ -25,6 +25,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Копируем все файлы приложения в рабочую директорию
 COPY . .
-
-# Указываем команду для запуска приложения
-CMD ["python", "bot.py"]

@@ -21,8 +21,3 @@ class DataBase:
         self.cursor.execute(query)
         self.db.commit()
         return self.cursor.fetchall()
-
-
-if __name__ == "__main__":
-    db = DataBase('users.db')
-    print(db.get_users())

@@ -6,7 +6,7 @@ from io import BytesIO
 
 from aiogram.types import FSInputFile
 
-from database.db_manager import DataBase
+from db_manager import DataBase
 
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
