@@ -114,5 +114,4 @@ async def main():
     await asyncio.gather(start_telethon(), start_aiogram())
 
 
-if __name__ == "__main__":
-    asyncio.run(main())
+asyncio.run(main())
