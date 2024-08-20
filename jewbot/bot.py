@@ -87,7 +87,7 @@ async def start_aiogram():
     async def send_welcome(message: types.Message):
         await message.answer(
             "<b>Шалом! ✡️ \n \nЭто бот-фильтр для телеграм канала Записки Еврея."
-            " Просто задай ключевые слова, по которым бот будет фильтровать посты для отправки тебе."
+            " Просто задай ключевые слова, по которым бот будет фильтровать посты и <u>включи уведомления</u>."
             "</b>\n \n/filter - настройки фильтра")
 
     dp.message.register(send_welcome, CommandStart())
