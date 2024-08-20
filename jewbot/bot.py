@@ -119,6 +119,16 @@ async def process_callback_button_click(callback_query: types.CallbackQuery, sta
     await callback_query.answer()
 
 
+@dp.callback_query(lambda c: c.data == 'unsubscribe_button')
+async def process_unsubscribe_button_click(callback_query: types.CallbackQuery):
+    await bot.send_message(
+        chat_id=callback_query.from_user.id,
+        text="Вы отписались от рассылки! 🙁",
+    )
+    db.add_user(callback_query.chat.id, '')
+    await callback_query.answer()
+
+
 @dp.message(Form.user_filter)
 async def process_name(message: types.Message, state: FSMContext):
     new_user_filter = message.text[0:150]
