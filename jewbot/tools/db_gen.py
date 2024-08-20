@@ -12,8 +12,7 @@ cursor = conn.cursor()
 # SQL-запрос для создания таблицы
 create_table_query = '''
 CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    telegram_id INTEGER NOT NULL,
+    telegram_id INTEGER PRIMARY KEY NOT NULL,
     filter TEXT NOT NULL
 );
 '''
