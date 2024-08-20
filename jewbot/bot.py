@@ -101,7 +101,10 @@ async def filter_command(message: types.Message, state: FSMContext):
         [InlineKeyboardButton(text='Изменить фильтр 📝', callback_data='change_filter_button')],
         [InlineKeyboardButton(text='Отписаться от рассылки 🚫', callback_data='unsubscribe_button')]
     ])
-    await message.answer(text='<b>Текущий фильтр:</b> ' + db.get_user_filter(message.from_user.id),
+    current_filter = db.get_user_filter(message.from_user.id)
+    if not current_filter:
+        current_filter = 'не задан'
+    await message.answer(text='<b>Текущий фильтр:</b> ' + current_filter,
                          reply_markup=keyboard)
 
 
@@ -125,7 +128,7 @@ async def process_unsubscribe_button_click(callback_query: types.CallbackQuery):
         chat_id=callback_query.from_user.id,
         text="Вы отписались от рассылки! 🙁",
     )
-    db.add_user(callback_query.chat.id, '')
+    db.add_user(callback_query.from_user.id, '')
     await callback_query.answer()
 
 

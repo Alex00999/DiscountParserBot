@@ -27,4 +27,4 @@ class DataBase:
                 """
         self.cursor.execute(query, (user_id,))
         result = self.cursor.fetchone()
-        return result[0] if result else 'фильтр не задан'
+        return result[0] if result else None
