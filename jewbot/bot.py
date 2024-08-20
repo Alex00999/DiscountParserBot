@@ -18,7 +18,7 @@ from aiogram.filters import Command, CommandStart
 # --- Telethon --- #
 api_id = 25404839
 api_hash = '63cdb13b5a70a129f301b84f1cd3b455'
-client = TelegramClient('27749763255/27749763255.session', api_id, api_hash)
+client = TelegramClient('database/27749763255.session', api_id, api_hash)
 
 # --- Aiogram --- #
 bot = Bot(token="7452829269:AAFslnBL0gLKJLrFA4CqWHcViqvjQxFc_kk")
@@ -29,7 +29,7 @@ db = DataBase()
 
 # --- Settings --- #
 TARGET_CHAT_ID = 418921990
-CHANNEL_NAME = 'Записки Еврея'
+CHANNEL_NAME = 'тест бота'
 
 
 def keywords_in_string(keywords, string):
@@ -114,4 +114,5 @@ async def main():
     await asyncio.gather(start_telethon(), start_aiogram())
 
 
-asyncio.run(main())
+if __name__ == '__main__':
+    asyncio.run(main())
