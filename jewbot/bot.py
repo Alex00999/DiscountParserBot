@@ -75,7 +75,7 @@ async def start_telethon():
                 else:
                     await bot.send_message(chat_id=user_id, text=message_text)
 
-    print("# Бот запущен.\n# Парсер запущен.")
+    print("# Парсер запущен.")
     await client.run_until_disconnected()
 
 
@@ -92,6 +92,7 @@ async def start_aiogram():
 
     dp.message.register(send_welcome, CommandStart())
 
+    print("# Бот запущен.")
     await dp.start_polling(bot)
 
 
@@ -151,7 +152,7 @@ async def main():
     """
     Запускает оба сервиса (Telethon и Aiogram) параллельно.
     """
-    await asyncio.gather(start_telethon(), start_aiogram())
+    await asyncio.gather(start_telethon())
 
 
 if __name__ == '__main__':
