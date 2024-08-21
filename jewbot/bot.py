@@ -29,7 +29,7 @@ dp = Dispatcher()
 db = DataBase()
 
 # --- Settings --- #
-CHANNEL_NAME = 'записки еврея'
+CHANNEL_NAME = 'тест бота'
 
 
 def keywords_in_string(keywords, string):
