@@ -152,7 +152,7 @@ async def main():
     """
     Запускает оба сервиса (Telethon и Aiogram) параллельно.
     """
-    await asyncio.gather(start_telethon())
+    await asyncio.gather(start_telethon(), start_aiogram())
 
 
 if __name__ == '__main__':
