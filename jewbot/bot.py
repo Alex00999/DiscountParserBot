@@ -71,9 +71,12 @@ async def start_telethon():
             if keywords_in_string(user_filter.split(), message_text):
                 message_text = message_text + f'\n\n<b>Ссылка на пост:</b> https://t.me/c/{channel_id}/{message_id}'
                 if event.message.media:
-                    await event.message.download_media('temp.jpg')
-                    await bot.send_photo(chat_id=user_id, photo=FSInputFile('temp.jpg'), caption=message_text)
-                    os.remove('temp.jpg')
+                    try:
+                        await event.message.download_media('temp.jpg')
+                        await bot.send_photo(chat_id=user_id, photo=FSInputFile('temp.jpg'), caption=message_text)
+                        os.remove('temp.jpg')
+                    except:
+                        await bot.send_message(chat_id=user_id, text=message_text)
                 else:
                     await bot.send_message(chat_id=user_id, text=message_text)
 
