@@ -47,7 +47,7 @@ async def start_telethon():
     await client.start()
     dialogs = await client.get_dialogs()
     target_dialog = None
-
+    print(dialogs)
     for dialog in dialogs:
         if dialog.title.lower() in CHANNEL_NAME:
             target_dialog = dialog
