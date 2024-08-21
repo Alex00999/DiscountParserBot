@@ -29,7 +29,7 @@ dp = Dispatcher()
 db = DataBase()
 
 # --- Settings --- #
-CHANNEL_NAME = 'тест бота'
+CHANNEL_NAME = ['тест бота', 'записки еврея']
 
 
 def keywords_in_string(keywords, string):
@@ -49,7 +49,7 @@ async def start_telethon():
     target_dialog = None
 
     for dialog in dialogs:
-        if dialog.title.lower() == CHANNEL_NAME:
+        if dialog.title.lower() in CHANNEL_NAME:
             target_dialog = dialog
             break
 
