@@ -29,7 +29,7 @@ dp = Dispatcher()
 db = DataBase()
 
 # --- Settings --- #
-CHANNEL_NAME = ['тест бота', 'записки еврея']
+CHANNEL_NAME = 'записки еврея'
 
 
 def keywords_in_string(keywords, string):
@@ -47,9 +47,9 @@ async def start_telethon():
     await client.start()
     dialogs = await client.get_dialogs()
     target_dialog = None
-    print(dialogs)
     for dialog in dialogs:
         if dialog.title.lower() in CHANNEL_NAME:
+            print(f"Канал {CHANNEL_NAME} найден.")
             target_dialog = dialog
             break
 
@@ -63,6 +63,7 @@ async def start_telethon():
         channel_id = event.message.peer_id.channel_id
         message_id = event.message.id
         message_text = event.message.message
+        print(event.message.message)
         print(f"Новый пост: {message_text}")
 
         for user_id, user_filter in db.get_users():
