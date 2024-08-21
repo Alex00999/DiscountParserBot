@@ -65,8 +65,9 @@ async def start_telethon():
         message_text = event.message.message
         print(event.message.message)
         print(f"Новый пост: {message_text}")
-
+        print(db.get_users())
         for user_id, user_filter in db.get_users():
+            print(keywords_in_string(user_filter.split(), message_text))
             if keywords_in_string(user_filter.split(), message_text):
                 message_text = message_text + f'\n\n<b>Ссылка на пост:</b> https://t.me/c/{channel_id}/{message_id}'
                 if event.message.media:
