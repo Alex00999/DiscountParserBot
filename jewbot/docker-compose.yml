@@ -5,7 +5,7 @@ services:
     build: .
     container_name: jew-bot
     volumes:
-      - database:/app/database
+      - database:/bot/database
     restart: unless-stopped
     command: python3 bot.py
 
