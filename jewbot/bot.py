@@ -63,22 +63,22 @@ async def start_telethon():
         channel_id = event.message.peer_id.channel_id
         message_id = event.message.id
         message_text = event.message.message
-        print(event.message.message)
+        formatted_message_text = message_text + f'\n\n<b>Ссылка на пост:</b> https://t.me/c/{channel_id}/{message_id}'
         print(f"Новый пост: {message_text}")
         print(db.get_users())
         for user_id, user_filter in db.get_users():
             print(keywords_in_string(user_filter.split(), message_text))
             if keywords_in_string(user_filter.split(), message_text):
-                message_text = message_text + f'\n\n<b>Ссылка на пост:</b> https://t.me/c/{channel_id}/{message_id}'
                 if event.message.media:
                     try:
                         await event.message.download_media('temp.jpg')
-                        await bot.send_photo(chat_id=user_id, photo=FSInputFile('temp.jpg'), caption=message_text)
+                        await bot.send_photo(chat_id=user_id, photo=FSInputFile('temp.jpg'),
+                                             caption=formatted_message_text)
                         os.remove('temp.jpg')
                     except:
-                        await bot.send_message(chat_id=user_id, text=message_text)
+                        await bot.send_message(chat_id=user_id, text=formatted_message_text)
                 else:
-                    await bot.send_message(chat_id=user_id, text=message_text)
+                    await bot.send_message(chat_id=user_id, text=formatted_message_text)
 
     print("# Парсер запущен.")
     await client.run_until_disconnected()
