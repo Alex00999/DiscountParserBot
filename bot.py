@@ -1,10 +1,9 @@
-import os
 import asyncio
 import re
 
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.types import FSInputFile, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import FSInputFile, InlineKeyboardMarkup, InlineKeyboardButton
 
 from database import DataBase
 
@@ -15,21 +14,20 @@ from telethon import TelegramClient, events
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command, CommandStart
 
-# --- Telethon --- #
-api_id = 25404839
-api_hash = '63cdb13b5a70a129f301b84f1cd3b455'
-client = TelegramClient('sessions/27749763255.session', api_id, api_hash)
+from dotenv import load_dotenv
+import os
 
-# --- Aiogram --- #
-bot = Bot(token="7452829269:AAFslnBL0gLKJLrFA4CqWHcViqvjQxFc_kk",
-          default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+load_dotenv()
+
+api_id = int(os.getenv("API_ID"))
+api_hash = os.getenv("API_HASH")
+print(api_id, api_hash)
+client = TelegramClient('telethon_parser.session', api_id, api_hash)
+
+bot = Bot(token=os.getenv("AIOGRAM_BOT_TOKEN"), default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+
 dp = Dispatcher()
-
-# --- SQLite --- #
 db = DataBase()
-
-# --- Settings --- #
-CHANNEL_NAME = 'записки еврея'
 
 
 def keywords_in_string(keywords, string):
@@ -49,6 +47,15 @@ async def start_telethon():
     # Обработчик новых сообщений
     @client.on(events.NewMessage())
     async def handler(event):
+        # Получаем название чата
+        chat_title = ''
+        if event.chat and hasattr(event.chat, 'title'):
+            chat_title = event.chat.title
+
+        # Проверяем, является ли название чата "Telegram"
+        if chat_title == 'Telegram':
+            return  # Игнорируем сообщения из этого чата
+
         if event.message.peer_id and hasattr(event.message.peer_id, 'channel_id'):
             channel_id = event.message.peer_id.channel_id
             message_id = event.message.id
@@ -72,7 +79,6 @@ async def start_telethon():
 
     print("# Парсер запущен.")
     await client.run_until_disconnected()
-
 
 
 async def start_aiogram():
